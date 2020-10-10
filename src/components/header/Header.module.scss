@@ -1,0 +1,52 @@
+@import 'variables.scss';
+
+.header {
+  background-color: $header-bg-color;
+  color: $header-color;
+  padding: 15px 0 25px;
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+    height: 60px;
+
+    .logo {
+      padding: 0 16px;
+    }
+
+    .headerItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .menuList {
+        display: flex;
+        margin: 0 auto;
+        list-style: none;
+        font-size: 15px;
+        font-weight: bold;
+
+        .navLink {
+          color: $header-color;
+        }
+
+        .navLink:hover {
+          transition: 0.5s ease-in-out;
+          text-decoration: underline;
+        }
+      }
+
+      .menuList li {
+        padding: 5px;
+      }
+    }
+  }
+
+  .btnWrapper {
+    width: 200px;
+    height: 40px;
+    position: relative;
+  }
+}

@@ -1,0 +1,35 @@
+.footerBtn {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 8px 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btnWrapper {
+  width: 120px;
+  height: 40px;
+  position: relative;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  .contactLinkList {
+    display: flex;
+    .contactLinkListItem {
+      padding: 8px 15px;
+      font-size: 18px;
+      font-weight: bold;
+      .navLink {
+        color: #000;
+      }
+    }
+  }
+  .LanguageChangeBtnWrapper {
+    display: flex;
+  }
+}
