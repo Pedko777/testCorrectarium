@@ -8,9 +8,8 @@ const Form = ({
   onFocus,
   onBlur,
   inputValues: { email, name, text, comments },
-  handleChangeText,
   handleChangeLanguage,
-  totalSymbols,
+  inputValues,
 price
 
 }) => {
@@ -54,16 +53,16 @@ price
                         value={text}
                         onFocus={onFocus}
                         onBlur={onBlur}
-                        onChange={handleChangeText}
+                        onChange={handleChange}
                     />
-                        <div>{totalSymbols}</div>
+                        <div>{inputValues.text?.length}</div>
                 </div>
                 <div>
                     <h3>МОВА</h3>
                     <section className={styles.languageList}>
                         <div>
                                 <label>
-                            <input type="radio" name="language" value="ua" onChange={handleChangeLanguage}/>
+                            <input type="radio" name="language" value="ua" onChange={handleChangeLanguage} />
                                     
                                     Українська</label>
                         </div>
@@ -94,7 +93,10 @@ price
                 </div>
             </div>
             <div className={styles.rightForm}>
-                    <div><h3>Summ: {price}</h3></div>
+                    <div>
+                        <h3>Summ: {price.toFixed(2)} грн.</h3>
+                    
+                    </div>
                 <div className={styles.btnWrapper}>
                     <Button
                         text="Замовити"
