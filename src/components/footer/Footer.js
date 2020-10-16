@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import Button from '../button/Button';
+// import Button from '../button/Button';
 import styles from "./Footer.module.scss"
 
 const Footer = () => {

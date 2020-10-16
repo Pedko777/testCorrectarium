@@ -3,16 +3,44 @@ import Button from '../button/Button'
 import styles from "./Form.module.scss"
 
 const Form = ({
-  handleChange,
-  handleSubmit,
-  onFocus,
-  onBlur,
-  inputValues: { email, name, text, comments },
-  handleChangeLanguage,
-  inputValues,
-price
-
+    handleChange,
+    handleSubmit,
+    onFocus,
+    onBlur,
+    inputValues: { email, name, text, comments },
+    handleChangeLanguage,
+    inputValues,
+    price,
+    date,
 }) => {
+    // const [expirationDate, setExpirationDate] = useState("");
+
+
+    // const currentTime = new Date()
+    // let options = { day: 'numeric' };
+    // const dateNumeric = Number(date.toLocaleString('ua-UA', options));
+    // let optionsHour = { hour: 'numeric' };
+    // const dateHour = Number(date.toLocaleString('ua-UA', optionsHour));
+    // let optionsMinutes = { minute: 'numeric' };
+    // const dateMinutes = Number(date.toLocaleString('ua-UA', optionsMinutes));
+    // const currentTimeDate = currentTime.getDate();
+    // const currentTimeHour = currentTime.getHours()
+    // const currentTimeMinutes = currentTime.getMinutes()
+
+    // const expirationTime = useCallback(() => {
+    //     if (dateNumeric === currentTimeDate) {
+    //         return setExpirationDate(dateHour - currentTimeHour)
+    //     } else {
+    //         return setExpirationDate(date)
+    //     }
+    // }, [dateNumeric, currentTimeDate, currentTimeHour, dateHour, date])
+
+    // useEffect(() => {
+    //     expirationTime()
+    // }, [date, expirationTime])
+
+  
+
         return (
         <form onSubmit={handleSubmit} className={styles.fromWrapper}>
             <div className={styles.leftForm}> 
@@ -61,20 +89,19 @@ price
                     <h3>МОВА</h3>
                     <section className={styles.languageList}>
                         <div>
-                                <label>
-                            <input type="radio" name="language" value="ua" onChange={handleChangeLanguage} />
-                                    
-                                    Українська</label>
+                            <label>
+                                <input type="radio" name="language" value="ua" onChange={handleChangeLanguage} defaultChecked />Українська
+                            </label>
                         </div>
                         <div>
-                                <label>
-                            <input type="radio" name="language" value="ru" onChange={handleChangeLanguage} />
-                                    Російська</label>
+                            <label>
+                                <input type="radio" name="language" value="ru" onChange={handleChangeLanguage} />Російська
+                            </label>
                         </div>
                         <div>
-                                <label>
-                            <input type="radio" name="language" value="en" onChange={handleChangeLanguage} />
-                                    Англійська</label>
+                            <label>
+                                <input type="radio" name="language" value="en" onChange={handleChangeLanguage} />Англійська
+                            </label>
                         </div>
                     </section>
                 </div>
@@ -95,7 +122,8 @@ price
             <div className={styles.rightForm}>
                     <div>
                         <h3>Summ: {price.toFixed(2)} грн.</h3>
-                    
+                        {inputValues.lenguage !== "" && inputValues.text !== "" ? <h3>Date: {}</h3> : <h3> </h3>}
+
                     </div>
                 <div className={styles.btnWrapper}>
                     <Button
