@@ -1,8 +1,8 @@
 //функция изминяющая время с учётом необходимого времени на перевод
 export const expirationTime = ({ balance, dateNow}) => {
+    // console.log(dateNow.valueOf())
     do {
         if ( dateNow.day() === 0 ||  dateNow.day() === 6) {
-
         dateNow.set(dateNow.add({day: 1}))
         } else if (dateNow.hour() >= 10 && dateNow.hour() <= 19) {
 
@@ -16,6 +16,7 @@ export const expirationTime = ({ balance, dateNow}) => {
             balance = 0
         }
         } else {
+            dateNow.set(dateNow.add({day: 1}));
             dateNow.set(dateNow.hour(10).minute(0))
         }
     }

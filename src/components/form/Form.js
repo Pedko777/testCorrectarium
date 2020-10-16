@@ -16,6 +16,7 @@ const Form = ({
     price,
     date,
 }) => {
+    console.log(date)
         return (
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
             <div className={styles.leftForm}> 
