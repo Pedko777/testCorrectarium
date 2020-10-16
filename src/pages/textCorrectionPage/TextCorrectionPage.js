@@ -16,13 +16,13 @@ const TextCorrectionPage = () => {
         language: "ua",
         comments: "",
     };
-    let dateNow = moment().local("uk");
+
+    const dateNow = moment().local("uk");
 
     const [inputValues, setInputValues] = useState(initialValues);
     const [data, setData] = useState([]);
     const [date, setDate] = useState({});
-    console.log("date", date);
-    console.log("dateNow", dateNow)
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -64,12 +64,12 @@ const TextCorrectionPage = () => {
     useEffect(() => {
         totalPrice(inputValues)
         expirationTime({ balance: timeToDo(inputValues), dateNow})
-        setDate(dateNow.format("DD.MM.YY HH.mm"))
+        setDate(dateNow)
     }, [inputValues, totalPrice, timeToDo])
     
 
         return (
-        <div className={`${styles.TextCorrectionPageWrapper} container`}>
+        <div className={`${styles.textCorrectionPageWrapper} container`}>
             <Form
             onFocus={onFocus}
             onBlur={onBlur}

@@ -2,9 +2,141 @@
   width: 200px;
   height: 40px;
   position: relative;
+
 }
 
-.fromWrapper {
+.formWrapper {
   display: flex;
   padding: 0 15px;
+  margin-bottom: 100px;
+}
+
+.leftForm {
+  padding: 0 15px;
+  .sectionHeader {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .sectionDesc {
+    margin-bottom: 8px;
+    line-height: 26px;
+    font-size: 15px;
+  }
+  .containerInput {
+    margin-bottom: 10px;
+    border-radius: 2px;
+    height: 35px;
+    position: relative;
+    .input:focus {
+      border-color: #4a90e2;
+    }
+  .input {
+    height: auto;
+    min-height: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: inherit;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #eaeaea;
+    box-shadow: none;
+    outline: none;
+  }
+
+
+  }
+  .email::before {
+    content: "*";
+    position: absolute;
+    color: red;
+    top: -5px;
+    left: -12px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.textareaWrapper{
+  position: relative; 
+  margin-bottom: 40px;
+  .areaText:focus {
+    border-color: #4a90e2;
+  }
+  .areaText {
+    font-size: 16px;
+    resize: none;
+    width: 100%;
+    min-height: 250px;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    outline: none;
+    padding: 10px;
+  }
+}
+
+.downloadFile {
+  position: absolute;
+  top: 11px;
+  left: 170px;
+  color: #4a90e2;
+  cursor: pointer;
+}
+
+.downloadFileInput {
+  display: none;
+}
+.symbols {
+  color: #999;
+    font-weight: 700;
+    font-size: 12px;
+    background-color: #fff;
+}
+
+.downloadFileTextDisplayNone {
+  display: none;
+}
+
+.sectionTitle {
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+.languageList {
+  margin-bottom: 40px;
+}
+
+.languageList div:not(:last-of-type) {
+  margin-bottom: 20px;
+}
+
+.rightForm {
+  position: relative;
+  height: 100%;
+  .submit {
+    position: sticky;
+    top: 10px;
+    border-top: 1px solid #eaeaea;
+    .content {
+      padding: 0 20px;
+      margin-top: 30px;
+      
+      .contentPrice {
+        flex-wrap: wrap;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        .price {
+          font-size: 22px;
+          font-weight: 700;
+          
+        }
+        .time{
+          text-align: center;
+        }
+      }
+    }
+    
+  }
 }

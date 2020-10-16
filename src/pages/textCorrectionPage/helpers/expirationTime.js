@@ -2,11 +2,11 @@
 export const expirationTime = ({ balance, dateNow}) => {
     do {
         if ( dateNow.day() === 0 ||  dateNow.day() === 6) {
-            // console.log("воскресенье или суббота")
+
         dateNow.set(dateNow.add({day: 1}))
         } else if (dateNow.hour() >= 10 && dateNow.hour() <= 19) {
-            // console.log("работаем с пн по пт с 10 до 19")
-        const timeLeft = (18 - dateNow.hour()) * 60 + (60 - dateNow.hour())
+
+        const timeLeft = (18 - dateNow.hour()) * 60 + (60 - dateNow.minute())
         if (balance > timeLeft) {
             balance -= timeLeft;
             dateNow.set(dateNow.add({day: 1}));
@@ -16,8 +16,6 @@ export const expirationTime = ({ balance, dateNow}) => {
             balance = 0
         }
         } else {
-                // console.log("не рабочее время")
-            // dateNow.set(dateNow.add({day: 1}));
             dateNow.set(dateNow.hour(10).minute(0))
         }
     }

@@ -1,6 +1,9 @@
-import React from 'react'
-import Button from '../button/Button'
-import styles from "./Form.module.scss"
+import React from 'react';
+import Button from '../button/Button';
+import styles from "./Form.module.scss";
+import moment from "moment";
+import { NavLink } from 'react-router-dom';
+import {fnCurrentTime} from "../../pages/textCorrectionPage/helpers/fnCurrentTime"
 
 const Form = ({
     handleChange,
@@ -13,41 +16,15 @@ const Form = ({
     price,
     date,
 }) => {
-    // const [expirationDate, setExpirationDate] = useState("");
-
-
-    // const currentTime = new Date()
-    // let options = { day: 'numeric' };
-    // const dateNumeric = Number(date.toLocaleString('ua-UA', options));
-    // let optionsHour = { hour: 'numeric' };
-    // const dateHour = Number(date.toLocaleString('ua-UA', optionsHour));
-    // let optionsMinutes = { minute: 'numeric' };
-    // const dateMinutes = Number(date.toLocaleString('ua-UA', optionsMinutes));
-    // const currentTimeDate = currentTime.getDate();
-    // const currentTimeHour = currentTime.getHours()
-    // const currentTimeMinutes = currentTime.getMinutes()
-
-    // const expirationTime = useCallback(() => {
-    //     if (dateNumeric === currentTimeDate) {
-    //         return setExpirationDate(dateHour - currentTimeHour)
-    //     } else {
-    //         return setExpirationDate(date)
-    //     }
-    // }, [dateNumeric, currentTimeDate, currentTimeHour, dateHour, date])
-
-    // useEffect(() => {
-    //     expirationTime()
-    // }, [date, expirationTime])
-
-  
-
         return (
-        <form onSubmit={handleSubmit} className={styles.fromWrapper}>
+        <form onSubmit={handleSubmit} className={styles.formWrapper}>
             <div className={styles.leftForm}> 
-                <h3>ЗАМОВИТИ РЕДАГУВАННЯ</h3>
-                <p>Виправимо всі помилки, приберемо всі дурниці, перефразуємо невдалі місця, але сильно текст не переписуватимемо. Зайвих виправлень не буде. Детальніше про редагування</p>
-                <section>
+                <h3 className={styles.sectionHeader}>ЗАМОВИТИ РЕДАГУВАННЯ</h3>
+                <p className={styles.sectionDesc}>Виправимо всі помилки, приберемо всі дурниці, перефразуємо невдалі місця, але сильно текст не переписуватимемо. Зайвих виправлень не буде. <NavLink to="#" exact>Детальніше про редагування</NavLink></p>
+                <section className={styles.containerInput}>
                     <input
+                        
+                        className={styles.input}
                         type="email"
                         placeholder="Ваша эл. почта"
                         required
@@ -58,8 +35,9 @@ const Form = ({
                         onChange={handleChange}
                     />
                 </section>
-                <div>
+                <section className={styles.containerInput}>
                     <input
+                        className={styles.input}
                         type="text"
                         placeholder="Ваше имя"
                         minLength="2"
@@ -71,22 +49,25 @@ const Form = ({
                         onBlur={onBlur}
                         onChange={handleChange}
                     />
-                </div>
-                <div>
-                    <textarea
+                </section>
+                <section className={styles.textareaWrapper}>
+                    <textarea                    
+                        className={styles.areaText}
                         type="text"
-                        placeholder="Уведіть текст або завантажте файл"
+                        placeholder="Уведіть текст або"
                         required
                         name="text"
                         value={text}
-                        onFocus={onFocus}
                         onBlur={onBlur}
-                        onChange={handleChange}
-                    />
-                        <div>{inputValues.text?.length}</div>
-                </div>
+                        onChange={handleChange}></textarea>
+                        <label className={styles.downloadFile}>
+                            <p className={inputValues.text.length !== 0 && onFocus ?  styles.downloadFileTextDisplayNone : styles.downloadFileText  }>завантажте файл</p>
+                            <input className={styles.downloadFileInput} type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, .rtf, .txt, .pdf, .zip"/>
+                        </label>
+                        <div className={styles.symbols}>{inputValues.text?.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                </section>
                 <div>
-                    <h3>МОВА</h3>
+                    <h3 className={styles.sectionTitle}>МОВА</h3>
                     <section className={styles.languageList}>
                         <div>
                             <label>
@@ -105,8 +86,9 @@ const Form = ({
                         </div>
                     </section>
                 </div>
-                 <div>
+                 <section className={styles.containerInput}>
                     <input
+                        className={styles.input}
                         type="text"
                         placeholder="Стислий коментар або покликання"
                         maxLength="60"
@@ -117,19 +99,22 @@ const Form = ({
                         onBlur={onBlur}
                         onChange={handleChange}
                     />
-                </div>
+                </section>
             </div>
             <div className={styles.rightForm}>
-                    <div>
-                        <h3>Summ: {price.toFixed(2)} грн.</h3>
-                        {inputValues.lenguage !== "" && inputValues.text !== "" ? <h3>Date: {}</h3> : <h3> </h3>}
-
+                <div className={styles.submit}>
+                    <div className={styles.content}>
+                        <div className={styles.contentPrice}>
+                            <div className={styles.price}>{price.toFixed(2)} грн.</div>
+                            <div className={styles.time}>{inputValues.lenguage !== "" && inputValues.text !== "" ? <p> {moment(date).day() === fnCurrentTime.day() ? date.hour() - fnCurrentTime.hour() <= 2 ? date.hour() - fnCurrentTime.hour() > 1 ? "Зробимо за дві години": "Зробимо за одну годину" :  moment(date).format("Термін виконання: DD.MM.YY o HH.mm год."):  moment(date).format("Термін виконання: DD.MM.YY o HH.mm год.")}</p> : <p> </p>}</div>
+                        </div>
+                        <div className={styles.btnWrapper}>
+                            <Button
+                                text="Замовити"
+                                type="submit"
+                            />
+                        </div>
                     </div>
-                <div className={styles.btnWrapper}>
-                    <Button
-                        text="Замовити"
-                        type="submit"
-                    />
                 </div>
             </div>
         </form>
