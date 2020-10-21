@@ -59,8 +59,13 @@ const calculateResultDate = (startTime, duration) => {
                 resultDate.set(resultDate.hour(10).minute(0))              
             } else {      
                 duration = Math.round(duration/60/60/1000)*60*60*1000 
-                resultDate.set(resultDate.add({ms: duration}))
-                duration = 0
+                if(duration < 60*60*1000) {
+                    resultDate.set(resultDate.add({ms: 60*60*1000}))
+                    duration = 0
+                } else {
+                    resultDate.set(resultDate.add({ms: duration}))
+                    duration = 0
+                }
             }
             } else {
                 resultDate.set(resultDate.add({day: 1}))
