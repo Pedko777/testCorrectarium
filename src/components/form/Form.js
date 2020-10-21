@@ -3,7 +3,6 @@ import Button from '../button/Button';
 import styles from "./Form.module.scss";
 import moment from "moment";
 import { NavLink } from 'react-router-dom';
-import {fnCurrentTime} from "../../pages/textCorrectionPage/helpers/fnCurrentTime"
 
 const Form = ({
     handleChange,
@@ -14,9 +13,15 @@ const Form = ({
     handleChangeLanguage,
     inputValues,
     price,
-    date,
+    resultDate,
+    duration,
 }) => {
-    console.log(date)
+    const currentTime = moment().locale("uk")
+    const resultTime = moment(resultDate, "DD.MM.YYYY o HH:mm")
+    const durationMm = duration / 60000;
+
+
+
         return (
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
             <div className={styles.leftForm}> 
@@ -24,7 +29,6 @@ const Form = ({
                 <p className={styles.sectionDesc}>Виправимо всі помилки, приберемо всі дурниці, перефразуємо невдалі місця, але сильно текст не переписуватимемо. Зайвих виправлень не буде. <NavLink to="#" exact>Детальніше про редагування</NavLink></p>
                 <section className={styles.containerInput}>
                     <input
-                        
                         className={styles.input}
                         type="email"
                         placeholder="Ваша эл. почта"
@@ -67,6 +71,32 @@ const Form = ({
                         </label>
                         <div className={styles.symbols}>{inputValues.text?.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                 </section>
+                <section>
+                    <h3 className={styles.sectionTitle}>Формат</h3>
+                    <select name="format" onChange={handleChange} className={styles.format}>
+                        <option value={undefined}  name="format" defaultChecked >
+                            не обрано
+                        </option>
+                        <option value=".doc">
+                            .doc
+                        </option>
+                        <option value=".docx">
+                            .docx
+                        </option>
+                        <option value=".rtf">
+                            .rtf
+                        </option>
+                        <option value=".pdf">
+                            .pdf
+                        </option>
+                        <option value=".txt">
+                            .txt
+                        </option>
+                        <option value=".zip">
+                            .zip
+                        </option>
+                    </select>
+                </section>
                 <div>
                     <h3 className={styles.sectionTitle}>МОВА</h3>
                     <section className={styles.languageList}>
@@ -107,8 +137,7 @@ const Form = ({
                     <div className={styles.content}>
                         <div className={styles.contentPrice}>
                             <div className={styles.price}>{price.toFixed(2)} грн.</div>
-                            <div className={styles.time}>{inputValues.lenguage !== "" && inputValues.text !== "" ? <p> {moment(date).day() === fnCurrentTime.day() ? date.hour() - fnCurrentTime.hour() <= 2 ? date.hour() - fnCurrentTime.hour() > 1 ? "Зробимо за дві години": "Зробимо за одну годину" :  moment(date).format("Термін виконання: DD.MM.YY o HH.mm год."):  moment(date).format("Термін виконання: DD.MM.YY o HH.mm год.")}</p> : <p> </p>}</div>
-                        </div>
+                            <div className={styles.time}>{inputValues.lenguage !== "" && inputValues.text !== "" ? <p> {resultTime.day() === currentTime.day()?durationMm <= 90? "зробимо за одну годину": durationMm <= 120 ? "зробимо за дві години":  `термін виконання ${resultDate}`: `термін виконання ${resultDate}`}</p> : <p> </p>}</div></div>
                         <div className={styles.btnWrapper}>
                             <Button
                                 text="Замовити"
