@@ -37,7 +37,6 @@ const calculateWorkDuration = (length, speed, format) => {
         return time <= 60 * 60 * 1000 ? 90 * 60 * 1000 : time
     } else {
         time = Math.round((length / speed + time)) *60*60*1000* 1.2
-        // time += Math.round(length / speed) * 60 * 60 * 1000 * 1.2
         return time <= 60 * 60 * 1000? 90 * 60 * 1000 * 1.2 : time
     }   
 }
@@ -58,8 +57,7 @@ const calculateResultDate = (startTime, duration) => {
                 resultDate.set(resultDate.add({day: 1}))
                 resultDate.set(resultDate.hour(10).minute(0))              
             } else {      
-                // resultDate.set(resultDate.hour(10).minute(0))  
-                duration = Math.round(duration/60/60/1000)*60*60*1000
+                duration = Math.round(duration/60/60/1000)*60*60*1000 
                 resultDate.set(resultDate.add({ms: duration}))
                 duration = 0
             }
@@ -69,7 +67,6 @@ const calculateResultDate = (startTime, duration) => {
             }
     } 
     while (duration !== 0 && resultDate.hour() >= 10 && resultDate.hour() <= 19)
-    // return resultDate
     return resultDate.format("DD.MM.YYYY o HH:mm", "uk")
 }
 
